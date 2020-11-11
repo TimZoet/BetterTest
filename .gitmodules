@@ -10,3 +10,12 @@
 [submodule "modules/parsertongue"]
 	path = modules/parsertongue
 	url = https://github.com/TimZoet/parsertongue-module.git
+[submodule "modules/svch"]
+	path = modules/svch
+	url = https://github.com/TimZoet/svch-module.git
+[submodule "modules/svg"]
+	path = modules/svg
+	url = https://github.com/TimZoet/svg-module.git
+[submodule "modules/svgen"]
+	path = modules/svgen
+	url = https://github.com/TimZoet/svgen-module.git

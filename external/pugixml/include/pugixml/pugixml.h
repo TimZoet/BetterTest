@@ -18,7 +18,7 @@
 #endif
 
 // Include user configuration file (this can define various configuration macros)
-#include "pugiconfig.hpp"
+#include "pugixml/pugiconfig.h"
 
 #ifndef HEADER_PUGIXML_HPP
 #define HEADER_PUGIXML_HPP
@@ -108,15 +108,6 @@
 #		define PUGIXML_OVERRIDE override
 #	else
 #		define PUGIXML_OVERRIDE
-#	endif
-#endif
-
-// If C++ is 2011 or higher, use 'nullptr'
-#ifndef PUGIXML_NULL
-#	if __cplusplus >= 201103
-#		define PUGIXML_NULL nullptr
-#	else
-#		define PUGIXML_NULL 0
 #	endif
 #endif
 
@@ -272,9 +263,6 @@ namespace pugi
 	// Nodes are indented depending on their depth in DOM tree, a default declaration is output if document has none.
 	const unsigned int format_default = format_indent;
 
-	const int default_double_precision = 17;
-	const int default_float_precision = 9;
-
 	// Forward declarations
 	struct xml_attribute_struct;
 	struct xml_node_struct;
@@ -422,9 +410,7 @@ namespace pugi
 		bool set_value(long rhs);
 		bool set_value(unsigned long rhs);
 		bool set_value(double rhs);
-		bool set_value(double rhs, int precision);
 		bool set_value(float rhs);
-		bool set_value(float rhs, int precision);
 		bool set_value(bool rhs);
 
 	#ifdef PUGIXML_HAS_LONG_LONG
@@ -590,15 +576,9 @@ namespace pugi
 		bool remove_attribute(const xml_attribute& a);
 		bool remove_attribute(const char_t* name);
 
-		// Remove all attributes
-		bool remove_attributes();
-
 		// Remove specified child
 		bool remove_child(const xml_node& n);
 		bool remove_child(const char_t* name);
-
-		// Remove all children
-		bool remove_children();
 
 		// Parses buffer as an XML document fragment and appends all nodes as children of the current node.
 		// Copies/converts the buffer, so it may be deleted or changed after the function returns.
@@ -670,15 +650,15 @@ namespace pugi
 
 	#ifndef PUGIXML_NO_XPATH
 		// Select single node by evaluating XPath query. Returns first node from the resulting node set.
-		xpath_node select_node(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL) const;
+		xpath_node select_node(const char_t* query, xpath_variable_set* variables = 0) const;
 		xpath_node select_node(const xpath_query& query) const;
 
 		// Select node set by evaluating XPath query
-		xpath_node_set select_nodes(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL) const;
+		xpath_node_set select_nodes(const char_t* query, xpath_variable_set* variables = 0) const;
 		xpath_node_set select_nodes(const xpath_query& query) const;
 
 		// (deprecated: use select_node instead) Select single node by evaluating XPath query.
-		PUGIXML_DEPRECATED xpath_node select_single_node(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL) const;
+		PUGIXML_DEPRECATED xpath_node select_single_node(const char_t* query, xpath_variable_set* variables = 0) const;
 		PUGIXML_DEPRECATED xpath_node select_single_node(const xpath_query& query) const;
 
 	#endif
@@ -781,9 +761,7 @@ namespace pugi
 		bool set(long rhs);
 		bool set(unsigned long rhs);
 		bool set(double rhs);
-		bool set(double rhs, int precision);
 		bool set(float rhs);
-		bool set(float rhs, int precision);
 		bool set(bool rhs);
 
 	#ifdef PUGIXML_HAS_LONG_LONG
@@ -1221,7 +1199,7 @@ namespace pugi
 	public:
 		// Construct a compiled object from XPath expression.
 		// If PUGIXML_NO_EXCEPTIONS is not defined, throws xpath_exception on compilation errors.
-		explicit xpath_query(const char_t* query, xpath_variable_set* variables = PUGIXML_NULL);
+		explicit xpath_query(const char_t* query, xpath_variable_set* variables = 0);
 
 		// Constructor
 		xpath_query();
@@ -1497,4 +1475,3 @@ namespace std
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-

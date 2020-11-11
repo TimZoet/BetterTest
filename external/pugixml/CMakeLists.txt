@@ -1,11 +1,11 @@
 set(NAME pugixml)
 set(TYPE module)
 set(INCLUDE_DIR "include/pugixml")
-set(SRC_DIR "include/pugixml")
+set(SRC_DIR "src")
 
 set(HEADERS
-	${INCLUDE_DIR}/pugiconfig.hpp
-	${INCLUDE_DIR}/pugixml.hpp
+	${INCLUDE_DIR}/pugiconfig.h
+	${INCLUDE_DIR}/pugixml.h
 )
  
 set(SOURCES

@@ -1,3 +1,6 @@
 [submodule "modules/bettertest"]
 	path = modules/bettertest
 	url = https://github.com/TimZoet/bettertest-module.git
+[submodule "modules/common"]
+	path = modules/common
+	url = https://github.com/TimZoet/common-module.git

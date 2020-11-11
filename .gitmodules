@@ -1,0 +1,3 @@
+[submodule "modules/bettertest"]
+	path = modules/bettertest
+	url = https://github.com/TimZoet/bettertest-module.git

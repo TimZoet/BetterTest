@@ -7,3 +7,6 @@
 [submodule "modules/math"]
 	path = modules/math
 	url = https://github.com/TimZoet/math-module.git
+[submodule "modules/parsertongue"]
+	path = modules/parsertongue
+	url = https://github.com/TimZoet/parsertongue-module.git

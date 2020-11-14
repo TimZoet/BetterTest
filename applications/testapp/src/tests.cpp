@@ -1,9 +1,12 @@
 #include "testapp/tests.h"
 
+#include "bettertest/exceptions/better_test_error.h"
+
 namespace test
 {
     void UnitTest::operator()()
     {
+        throw bt::BetterTestError("hello");
         compareEQ(1, 2);
         compareEQ(1, 2).info("info msg");
         compareEQ(1, 2).warning("warning msg");

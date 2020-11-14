@@ -33,6 +33,7 @@ endif()
 ################################################################################
 
 add_subdirectory(applications)
+add_subdirectory(examples)
 add_subdirectory(external)
 add_subdirectory(modules)
 

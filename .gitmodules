@@ -1,24 +1,24 @@
 [submodule "modules/bettertest"]
 	path = modules/bettertest
-	url = https://github.com/TimZoet/bettertest-module.git
+	url = git@github.com:TimZoet/bettertest-module.git
 [submodule "modules/common"]
 	path = modules/common
-	url = https://github.com/TimZoet/common-module.git
+	url = git@github.com:TimZoet/common-module.git
 [submodule "modules/math"]
 	path = modules/math
-	url = https://github.com/TimZoet/math-module.git
+	url = git@github.com:TimZoet/math-module.git
 [submodule "modules/parsertongue"]
 	path = modules/parsertongue
-	url = https://github.com/TimZoet/parsertongue-module.git
+	url = git@github.com:TimZoet/parsertongue-module.git
 [submodule "modules/svch"]
 	path = modules/svch
-	url = https://github.com/TimZoet/svch-module.git
+	url = git@github.com:TimZoet/svch-module.git
 [submodule "modules/svg"]
 	path = modules/svg
-	url = https://github.com/TimZoet/svg-module.git
+	url = git@github.com:TimZoet/svg-module.git
 [submodule "modules/svgen"]
 	path = modules/svgen
-	url = https://github.com/TimZoet/svgen-module.git
+	url = git@github.com:TimZoet/svgen-module.git
 [submodule "cmake"]
 	path = cmake
 	url = git@github.com:TimZoet/cmake-module.git

@@ -19,3 +19,6 @@
 [submodule "modules/svgen"]
 	path = modules/svgen
 	url = https://github.com/TimZoet/svgen-module.git
+[submodule "cmake"]
+	path = cmake
+	url = git@github.com:TimZoet/cmake-module.git

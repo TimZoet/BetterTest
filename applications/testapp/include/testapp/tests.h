@@ -21,4 +21,16 @@ namespace test
     public:
         void operator()() override;
     };
+
+    class UnitTest3 : public bt::UnitTest<UnitTest3, bt::CompareMixin>
+    {
+    public:
+        void operator()() override;
+    };
+
+    class UnitTest4 : public bt::UnitTest<UnitTest4, bt::CompareMixin, bt::ExceptionMixin>
+    {
+    public:
+        void operator()() override;
+    };
 }  // namespace app

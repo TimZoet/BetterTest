@@ -7,6 +7,8 @@
 #include "Windows.h"
 #endif
 
+#include "common/ansi_colors.h"
+
 int main(int argc, char** argv)
 {
     // Set path next to executable.
@@ -19,7 +21,7 @@ int main(int argc, char** argv)
         std::filesystem::current_path(p);
     }
 #endif
-    bt::run<test::UnitTest, test::UnitTest2>(
-      argc, argv, "testapp");
+    bt::run<test::UnitTest, test::UnitTest2, test::UnitTest3, test::UnitTest4>(argc, argv, "testapp");
+
     return 0;
 }

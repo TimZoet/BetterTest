@@ -1,7 +1,1 @@
 add_subdirectory(bettertest)
-add_subdirectory(common)
-add_subdirectory(math)
-add_subdirectory(parsertongue)
-add_subdirectory(svch)
-add_subdirectory(svg)
-add_subdirectory(svgen)

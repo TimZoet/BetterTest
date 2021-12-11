@@ -6,7 +6,9 @@ set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "_CMakePredefinedTargets"
 # Project.
 ################################################################################
 
-project(BetterTest VERSION 0.1.0 LANGUAGES CXX)
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/modules/bettertest")
+include(bettertestVersionString)
+project(BetterTest VERSION ${BETTERTEST_VERSION} LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
@@ -14,28 +16,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # CMake modules.
 ################################################################################
 
-set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_BINARY_DIR};${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(InstallTarget)
 include(ISA)
 include(MakeTarget)
-
-################################################################################
-# Conan.
-################################################################################
-
-option(USE_CONAN "If you are using the Conan package manager, enable this option.")
-if(USE_CONAN)
-    include(ConanPkgUtils)
-    conan_pkg_utils(PROFILE gcc10.1 PACKAGES nlohmann_json/3.9.1)
-endif()
 
 ################################################################################
 # Add subdirectories.
 ################################################################################
 
 add_subdirectory(applications)
-add_subdirectory(examples)
-add_subdirectory(external)
 add_subdirectory(modules)
+if (BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
 
 ################################################################################
 # Set startup project.

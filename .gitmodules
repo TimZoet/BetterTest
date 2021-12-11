@@ -1,15 +1,6 @@
 [submodule "modules/bettertest"]
 	path = modules/bettertest
 	url = git@github.com:TimZoet/bettertest-module.git
-[submodule "modules/common"]
-	path = modules/common
-	url = git@github.com:TimZoet/common-module.git
-[submodule "modules/math"]
-	path = modules/math
-	url = git@github.com:TimZoet/math-module.git
-[submodule "modules/parsertongue"]
-	path = modules/parsertongue
-	url = git@github.com:TimZoet/parsertongue-module.git
 [submodule "modules/svch"]
 	path = modules/svch
 	url = git@github.com:TimZoet/svch-module.git

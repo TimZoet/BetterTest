@@ -13,14 +13,6 @@ def get_version():
     except Exception as e:
         return None
 
-def get_requires():
-    try:
-        content = load("conanfile.txt")
-        version = re.search("set\(BETTERTEST_VERSION (\d+\.\d+\.\d+)\)", content).group(1)
-        return version.strip()
-    except Exception as e:
-        return None
-
 class BetterTestConan(ConanFile):
     name = "BetterTest"
     version = get_version()

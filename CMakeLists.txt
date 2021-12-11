@@ -25,7 +25,6 @@ include(MakeTarget)
 # Add subdirectories.
 ################################################################################
 
-add_subdirectory(applications)
 add_subdirectory(modules)
 if (BUILD_EXAMPLES)
     add_subdirectory(examples)

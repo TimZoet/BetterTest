@@ -81,17 +81,23 @@ class BetterTestConan(ConanFile):
         if self.options.build_json:
             self.cpp_info.components["json"].libs = ["bettertest_json"]
             self.cpp_info.components["json"].requires = ["core", "nlohmann_json::nlohmann_json"]
-            self.cpp_info.components["json"].defines = ["BETTERTEST_BUILD_JSON"]
+            self.cpp_info.components["json"].defines = ["BETTERTEST_BUILD_JSON=ON"]
         
         if self.options.build_xml:
             self.cpp_info.components["xml"].libs = ["bettertest_xml"]
             self.cpp_info.components["xml"].requires = ["core", "pugixml::pugixml"]
-            self.cpp_info.components["xml"].defines = ["BETTERTEST_BUILD_XML"]
+            self.cpp_info.components["xml"].defines = ["BETTERTEST_BUILD_XML=ON"]
     
     def generate(self):
         base = self.python_requires["pyreq"].module.BaseConan
         
         tc = base.generate_toolchain(self)
+        
+        if self.options.build_json:
+            tc.variables["BETTERTEST_BUILD_JSON"] = True
+        if self.options.build_xml:
+            tc.variables["BETTERTEST_BUILD_XML"] = True
+        
         tc.generate()
         
         deps = base.generate_deps(self)
@@ -100,13 +106,6 @@ class BetterTestConan(ConanFile):
     def configure_cmake(self):
         base = self.python_requires["pyreq"].module.BaseConan
         cmake = base.configure_cmake(self)
-        
-        if self.options.build_json:
-            cmake.definitions["BETTERTEST_BUILD_JSON"] = True
-        
-        if self.options.build_xml:
-            cmake.definitions["BETTERTEST_BUILD_XML"] = True
-        
         return cmake
 
     def build(self):

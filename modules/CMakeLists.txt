@@ -1,1 +1,3 @@
 add_subdirectory(bettertest)
+add_subdirectory(bettertest_json)
+add_subdirectory(bettertest_xml)

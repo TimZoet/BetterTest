@@ -12,6 +12,8 @@ set(SOURCES
 
 set(DEPS_PRIVATE
 	bettertest
+    bettertest_json
+    bettertest_xml
 )
 
 make_target(NAME ${NAME} TYPE ${TYPE} EXAMPLE HEADERS "${HEADERS}" SOURCES "${SOURCES}" DEPS_PRIVATE "${DEPS_PRIVATE}")

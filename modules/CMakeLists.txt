@@ -1,4 +1,7 @@
 add_subdirectory(bettertest)
+if(BETTERTEST_BUILD_ALEXANDRIA)
+    add_subdirectory(bettertest_alexandria)
+endif()
 if(BETTERTEST_BUILD_JSON)
     add_subdirectory(bettertest_json)
 endif()

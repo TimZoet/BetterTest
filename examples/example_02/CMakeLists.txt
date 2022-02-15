@@ -12,6 +12,7 @@ set(SOURCES
 
 set(DEPS_PRIVATE
 	bettertest
+    bettertest_alexandria
     bettertest_json
     bettertest_xml
 )

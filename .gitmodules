@@ -10,3 +10,6 @@
 [submodule "modules/bettertest_xml"]
 	path = modules/bettertest_xml
 	url = git@github.com:TimZoet/bettertest-xml-module.git
+[submodule "modules/bettertest_alexandria"]
+	path = modules/bettertest_alexandria
+	url = git@github.com:TimZoet/bettertest-alexandria-module.git

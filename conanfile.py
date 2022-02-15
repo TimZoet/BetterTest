@@ -20,11 +20,13 @@ class BetterTestConan(ConanFile):
     python_requires_extend = "pyreq.BaseConan"
     
     options = {
+        "build_alexandria": [True, False],
         "build_json": [True, False],
         "build_xml": [True, False]
     }
     
     default_options = {
+        "build_alexandria": True,
         "build_json": True,
         "build_xml": True
     }
@@ -69,6 +71,8 @@ class BetterTestConan(ConanFile):
         self.requires("date/3.0.1")
         self.requires("parsertongue/1.1.0@timzoet/stable")
         
+        if self.options.build_alexandria:
+            self.requires("alexandria/1.0.0@timzoet/stable")
         if self.options.build_json:
             self.requires("nlohmann_json/3.9.1")
         if self.options.build_xml:
@@ -77,6 +81,11 @@ class BetterTestConan(ConanFile):
     def package_info(self):
         self.cpp_info.components["core"].libs = ["bettertest"]
         self.cpp_info.components["core"].requires = ["common::common", "date::date", "parsertongue::parsertongue"]
+        
+        if self.options.build_alexandria:
+            self.cpp_info.components["alexandria"].libs = ["bettertest_alexandria"]
+            self.cpp_info.components["alexandria"].requires = ["core", "alexandria::alexandria"]
+            self.cpp_info.components["alexandria"].defines = ["BETTERTEST_BUILD_ALEXANDRIA=ON"]
         
         if self.options.build_json:
             self.cpp_info.components["json"].libs = ["bettertest_json"]
@@ -93,6 +102,8 @@ class BetterTestConan(ConanFile):
         
         tc = base.generate_toolchain(self)
         
+        if self.options.build_alexandria:
+            tc.variables["BETTERTEST_BUILD_ALEXANDRIA"] = True
         if self.options.build_json:
             tc.variables["BETTERTEST_BUILD_JSON"] = True
         if self.options.build_xml:

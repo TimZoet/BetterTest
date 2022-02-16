@@ -1,10 +1,6 @@
 #include "bettertest/run.h"
 #include "bettertest/mixins/compare_mixin.h"
 #include "bettertest/tests/unit_test.h"
-#include "bettertest_json/json_exporter.h"
-#include "bettertest_json/json_importer.h"
-#include "bettertest_xml/xml_exporter.h"
-#include "bettertest_xml/xml_importer.h"
 
 class UnitTest01 : public bt::UnitTest<UnitTest01, bt::CompareMixin>
 {
@@ -19,10 +15,6 @@ public:
 
 int main(int argc, char** argv)
 {
-    bt::registerExporter<bt::JsonExporter>();
-    bt::registerImporter<bt::JsonImporter>();
-    bt::registerExporter<bt::XmlExporter>();
-    bt::registerImporter<bt::XmlImporter>();
     bt::run<UnitTest01>(argc, argv, "myFirstTestSuite");
     return 0;
 }

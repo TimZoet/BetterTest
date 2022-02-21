@@ -19,8 +19,8 @@ failure.
 Sometimes a failed check should result in immediate termination of a test. For example, inspecting the contents of a
 list should always be preceded by a check of that list's size. Accessing non-existing elements would result in
 misleading out of bounds errors. Some testing libraries handle this by providing a terminating and non-terminating
-version of the same function, e.g. :code:`requireEQ` and :code:`expectEQ`. This is not very elegant. BetterTest solves
-this problem by returning an object that has a :code:`fatal` method. If the check failed, calling this method will end
+version of the same function, e.g. `requireEQ` and `expectEQ`. This is not very elegant. BetterTest solves
+this problem by returning an object that has a `fatal` method. If the check failed, calling this method will end
 the test with an error message:
 
 ```cpp
@@ -38,5 +38,5 @@ to a Sqlite database. Additionally, implementing your own exporter is trivial.
 
 ## Parallel Runs
 
-BetterTest has native support for running tests in parallel using :code:`std::async`. No need to write silly scripts
+BetterTest has native support for running tests in parallel using `std::async`. No need to write silly scripts
 that simulate this by running the same executable multiple times with different parameters.

@@ -2,7 +2,8 @@
 
 BetterTest is a modern, macro free, extensible testing library.
 
-For building, exporting and installing please refer to the [build instructions](build_instructions.md).
+For building, exporting and installing please refer to the [build instructions](build_instructions.md). Everything else
+can be found in the [manual](https://github.com/TimZoet/BetterTest-manual).
 
 ## Macro Free
 

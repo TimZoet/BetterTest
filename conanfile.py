@@ -117,6 +117,14 @@ class BetterTestConan(ConanFile):
     def configure_cmake(self):
         base = self.python_requires["pyreq"].module.BaseConan
         cmake = base.configure_cmake(self)
+        
+        if self.options.build_alexandria:
+            cmake.definitions["BETTERTEST_BUILD_ALEXANDRIA"] = True
+        if self.options.build_json:
+            cmake.definitions["BETTERTEST_BUILD_JSON"] = True
+        if self.options.build_xml:
+            cmake.definitions["BETTERTEST_BUILD_XML"] = True
+        
         return cmake
 
     def build(self):

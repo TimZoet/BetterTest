@@ -1,6 +1,3 @@
-[submodule "modules/bettertest"]
-	path = modules/bettertest
-	url = git@github.com:TimZoet/bettertest-module.git
 [submodule "modules/bettertest_json"]
 	path = modules/bettertest_json
 	url = git@github.com:TimZoet/bettertest-json-module.git

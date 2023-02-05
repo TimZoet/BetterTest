@@ -1,4 +1,5 @@
-from conans import ConanFile
+from conan import ConanFile
+from conan.tools.files import copy
 
 class BetterTestConan(ConanFile):
     ############################################################################
@@ -51,17 +52,21 @@ class BetterTestConan(ConanFile):
     ############################################################################
     
     def export_sources(self):
-        self.copy("CMakeLists.txt")
-        self.copy("license")
-        self.copy("readme.md")
-        self.copy("cmake/*")
-        self.copy("modules/CMakeLists.txt")
-        self.copy("modules/*")
+        copy(self, "CMakeLists.txt", self.recipe_folder, self.export_sources_folder)
+        copy(self, "license", self.recipe_folder, self.export_sources_folder)
+        copy(self, "readme.md", self.recipe_folder, self.export_sources_folder)
+        copy(self, "cmake/*", self.recipe_folder, self.export_sources_folder)
+        copy(self, "modules/CMakeLists.txt", self.recipe_folder, self.export_sources_folder)
+        copy(self, "modules/*", self.recipe_folder, self.export_sources_folder)
     
     def config_options(self):
         base = self.python_requires["pyreq"].module.BaseConan
         if self.settings.os == "Windows":
             del self.options.fPIC
+    
+    def configure(self):
+        # Disable this option to prevent pulling in libcurl.
+        self.options["date"].use_system_tz_db = True
     
     def requirements(self):
         base = self.python_requires["pyreq"].module.BaseConan
@@ -117,14 +122,6 @@ class BetterTestConan(ConanFile):
     def configure_cmake(self):
         base = self.python_requires["pyreq"].module.BaseConan
         cmake = base.configure_cmake(self)
-        
-        if self.options.build_alexandria:
-            cmake.definitions["BETTERTEST_BUILD_ALEXANDRIA"] = True
-        if self.options.build_json:
-            cmake.definitions["BETTERTEST_BUILD_JSON"] = True
-        if self.options.build_xml:
-            cmake.definitions["BETTERTEST_BUILD_XML"] = True
-        
         return cmake
 
     def build(self):

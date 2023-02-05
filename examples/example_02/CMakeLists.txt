@@ -12,9 +12,9 @@ set(SOURCES
 
 set(DEPS_PRIVATE
 	bettertest
-    bettertest_alexandria
-    bettertest_json
-    bettertest_xml
+    $<$<BOOL:${BETTERTEST_BUILD_ALEXANDRIA}>:bettertest_alexandria>
+    $<$<BOOL:${BETTERTEST_BUILD_JSON}>:bettertest_json>
+    $<$<BOOL:${BETTERTEST_BUILD_XML}>:bettertest_xml>
 )
 
 make_target(NAME ${NAME} TYPE ${TYPE} EXAMPLE HEADERS "${HEADERS}" SOURCES "${SOURCES}" DEPS_PRIVATE "${DEPS_PRIVATE}")

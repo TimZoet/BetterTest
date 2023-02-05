@@ -6,7 +6,7 @@ set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "_CMakePredefinedTargets"
 # Project.
 ################################################################################
 
-set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/modules/bettertest")
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}")
 include(bettertestVersionString)
 project(BetterTest VERSION ${BETTERTEST_VERSION} LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)

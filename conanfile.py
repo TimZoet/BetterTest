@@ -73,7 +73,7 @@ class BetterTestConan(ConanFile):
         
         self.requires("common/1.0.0@timzoet/stable")
         self.requires("date/3.0.1")
-        self.requires("parsertongue/1.1.0@timzoet/stable")
+        self.requires("parsertongue/[>=1.1 <2]@timzoet/stable")
         
         if self.options.build_alexandria:
             self.requires("alexandria/1.0.0@timzoet/stable")

@@ -28,6 +28,8 @@ namespace bt
     class UnitTestRunner final : public ITestRunner
     {
     public:
+        using test_t = T;
+
         UnitTestRunner()
         {
             if constexpr (hasExplicitName<T>)
@@ -84,6 +86,20 @@ namespace bt
             exporter.writeUnitTestResults(suite, t, getTestName());
 
             return std::make_pair(passing, error.str());
+        }
+
+        /**
+         * \brief Returns whether the test held by this runner can run in parallel. If not, it will always run serialized.
+         * \return True or false.
+         */
+        [[nodiscard]] bool isParallel() const noexcept override
+        {
+            // If test has a static member isParallel, use that to determine if test can run in parallel.
+            // Otherwise, default to true.
+            if constexpr (requires(test_t) { test_t::isParallel; })
+                return test_t::isParallel;
+            else
+                return true;
         }
     };
 }  // namespace bt

@@ -102,7 +102,7 @@ namespace bt
          * \param out Output.
          */
         void operator()(const TestSuite& suite, IExporter& exporter, std::ostream& out);
-        
+
     private:
         /**
          * \brief Determine which tests need to run.
@@ -111,9 +111,9 @@ namespace bt
          */
         void resolveTests(const TestSuite& suite, std::ostream& out);
 
-        void runTests(const TestSuite& suite, IExporter& exporter, std::ostream& out);
+        void runTestsSerialized(const TestSuite& suite, IExporter& exporter, std::ostream& out) const;
 
-        void runTestsMultithreaded(const TestSuite& suite, IExporter& exporter, std::ostream& out);
+        void runTestsMultithreaded(const TestSuite& suite, IExporter& exporter, std::ostream& out) const;
 
         ////////////////////////////////////////////////////////////////
         // Member variables.

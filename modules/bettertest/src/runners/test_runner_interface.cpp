@@ -17,5 +17,4 @@ namespace bt
             testName.replace(i, 1, "");
         }
     }
-
 }  // namespace bt

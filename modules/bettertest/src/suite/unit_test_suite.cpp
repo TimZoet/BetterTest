@@ -81,10 +81,8 @@ namespace bt
     void UnitTestSuite::operator()(const TestSuite& suite, IExporter& exporter, std::ostream& out)
     {
         resolveTests(suite, out);
-        if (multiThreaded)
-            runTestsMultithreaded(suite, exporter, out);
-        else
-            runTests(suite, exporter, out);
+        if (multiThreaded) runTestsMultithreaded(suite, exporter, out);
+        runTestsSerialized(suite, exporter, out);
     }
 
     void UnitTestSuite::resolveTests(const TestSuite& suite, std::ostream& out)
@@ -126,18 +124,21 @@ namespace bt
         out << "Running " << testCount << "/" << runners.size() << " tests\n\n";
     }
 
-    void UnitTestSuite::runTests(const TestSuite& suite, IExporter& exporter, std::ostream& out)
+    void UnitTestSuite::runTestsSerialized(const TestSuite& suite, IExporter& exporter, std::ostream& out) const
     {
         for (const auto& testData : data)
         {
             // Skip tests without a runner.
             if (!testData->hasRunnerIndex()) continue;
 
-            std::stringstream ss;
-            auto&             runner = runners[testData->runnerIndex];
+            auto& runner = *runners[testData->runnerIndex];
+
+            // Skip tests that can run in parallel when the suite is being run in multithreaded mode.
+            if (multiThreaded && runner.isParallel()) continue;
 
             // Run test.
-            const auto [pass, error] = (*runner)(suite, exporter, ss);
+            std::stringstream ss;
+            const auto [pass, error] = runner(suite, exporter, ss);
 
             // If test failed due to an exception, output error message.
             if (!pass && !error.empty()) ss << "The following error occurred:\n" << error << "\n";
@@ -146,11 +147,11 @@ namespace bt
             testData->finalize(suite, pass);
 
             // Print output.
-            printResults(out, ss, pass, *runner);
+            printResults(out, ss, pass, runner);
         }
     }
 
-    void UnitTestSuite::runTestsMultithreaded(const TestSuite& suite, IExporter& exporter, std::ostream& out)
+    void UnitTestSuite::runTestsMultithreaded(const TestSuite& suite, IExporter& exporter, std::ostream& out) const
     {
         std::vector<std::future<void>> tasks;
         std::mutex                     mutex;
@@ -160,12 +161,16 @@ namespace bt
             // Skip tests without a runner.
             if (!testData->hasRunnerIndex()) continue;
 
+            auto& runner = *runners[testData->runnerIndex];
+
+            // Skip tests that cannot run in parallel.
+            if (!runner.isParallel()) continue;
+
             tasks.push_back(std::async(std::launch::async, [&] {
                 std::stringstream ss;
-                const auto&       runner = runners[testData->runnerIndex];
 
                 // Run test.
-                const auto [pass, error] = (*runner)(suite, exporter, ss);
+                const auto [pass, error] = runner(suite, exporter, ss);
 
                 // If test failed due to an exception, output error message.
                 if (!pass && !error.empty()) ss << "The following error occurred:\n" << error << "\n";
@@ -176,7 +181,7 @@ namespace bt
                 // Print output.
                 {
                     std::scoped_lock lock(mutex);
-                    printResults(out, ss, pass, *runner);
+                    printResults(out, ss, pass, runner);
                 }
             }));
         }

@@ -27,9 +27,11 @@ class BetterTestConan(ConanFile):
     }
     
     default_options = {
-        "build_alexandria": True,
+        "build_alexandria": False,
         "build_json": True,
-        "build_xml": True
+        "build_xml": True,
+        "date/*:header_only": True,
+        "date/*:use_system_tz_db": True
     }
     
     ############################################################################
@@ -42,10 +44,8 @@ class BetterTestConan(ConanFile):
     
     def init(self):
         base = self.python_requires["pyreq"].module.BaseConan
-        self.generators = base.generators + self.generators
-        self.settings = base.settings + self.settings
-        self.options = {**base.options, **self.options}
-        self.default_options = {**base.default_options, **self.default_options}
+        self.settings = base.settings
+        self.options.update(base.options, base.default_options)
     
     ############################################################################
     ## Building.                                                              ##
@@ -59,14 +59,12 @@ class BetterTestConan(ConanFile):
         copy(self, "modules/*", self.recipe_folder, self.export_sources_folder)
     
     def config_options(self):
-        base = self.python_requires["pyreq"].module.BaseConan
         if self.settings.os == "Windows":
             del self.options.fPIC
     
     def configure(self):
-        # Disable this option to prevent pulling in libcurl.
-        self.options["date"].use_system_tz_db = True
-    
+        pass
+
     def requirements(self):
         base = self.python_requires["pyreq"].module.BaseConan
         base.requirements(self)
@@ -84,7 +82,7 @@ class BetterTestConan(ConanFile):
     
     def package_info(self):
         self.cpp_info.components["core"].libs = ["bettertest"]
-        self.cpp_info.components["core"].requires = ["common::common", "date::date", "parsertongue::parsertongue"]
+        self.cpp_info.components["core"].requires = ["cmake-modules::cmake-modules", "common::common", "date::date", "parsertongue::parsertongue"]
         
         if self.options.build_alexandria:
             self.cpp_info.components["alexandria"].libs = ["bettertest_alexandria"]

@@ -156,7 +156,7 @@ namespace bt
             // Run suite.
             suite();
 
-            return suite.getData().passing ? 1 : 0;
+            return suite.getData().passing ? 0 : 1;
         }
         catch (...)
         {

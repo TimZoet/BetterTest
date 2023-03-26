@@ -69,7 +69,7 @@ class BetterTestConan(ConanFile):
         base = self.python_requires["pyreq"].module.BaseConan
         base.requirements(self)
         
-        self.requires("common/1.0.0@timzoet/stable")
+        self.requires("common/1.0.0@timzoet/github_actions")
         self.requires("date/3.0.1")
         self.requires("parsertongue/[>=1.1 <2]@timzoet/github_actions")
         

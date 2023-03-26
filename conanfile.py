@@ -16,7 +16,7 @@ class BetterTestConan(ConanFile):
     ## Settings.                                                              ##
     ############################################################################
 
-    python_requires = "pyreq/1.0.0@timzoet/stable"
+    python_requires = "pyreq/1.0.0@timzoet/github_actions"
     
     python_requires_extend = "pyreq.BaseConan"
     
@@ -71,7 +71,7 @@ class BetterTestConan(ConanFile):
         
         self.requires("common/1.0.0@timzoet/stable")
         self.requires("date/3.0.1")
-        self.requires("parsertongue/[>=1.1 <2]@timzoet/stable")
+        self.requires("parsertongue/[>=1.1 <2]@timzoet/github_actions")
         
         if self.options.build_alexandria:
             self.requires("alexandria/1.0.0@timzoet/stable")

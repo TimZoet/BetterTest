@@ -137,21 +137,30 @@ namespace bt
      * \param suiteName Test suite name.
      */
     template<IsITest T, IsITest... Ts>
-    void run(const int argc, char** argv, const std::string suiteName)
+    int32_t run(const int argc, char** argv, const std::string suiteName)
     {
-        internal::registerBuiltinOutputFormats();
-        internal::initialize();
+        try
+        {
+            internal::registerBuiltinOutputFormats();
+            internal::initialize();
 
-        // Create suite.
-        TestSuite suite(suiteName);
+            // Create suite.
+            TestSuite suite(suiteName);
 
-        // Add all tests.
-        internal::addRunners<T, Ts...>(suite);
+            // Add all tests.
+            internal::addRunners<T, Ts...>(suite);
 
-        // Parse command line arguments.
-        if (!internal::parse(argc, argv, suite)) return;
+            // Parse command line arguments.
+            if (!internal::parse(argc, argv, suite)) return 1;
 
-        // Run suite.
-        suite();
+            // Run suite.
+            suite();
+
+            return suite.getData().passing ? 0 : 1;
+        }
+        catch (...)
+        {
+            return 1;
+        }
     }
 }  // namespace bt

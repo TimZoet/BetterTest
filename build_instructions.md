@@ -1,26 +1,11 @@
 # Build Instructions
 
-## Dependencies
+## Getting the Code
 
-The following Conan packages are always required:
-
-1. [pyreq](https://github.com/TimZoet/pyreq)
-2. [common](https://github.com/TimZoet/common)
-3. [date](https://github.com/HowardHinnant/date)
-4. [parsertongue](https://github.com/TimZoet/ParserTongue)
-
-Depending on enabled options, you may also need:
-
-1. [alexandria](https://github.com/TimZoet/Alexandria)
-2. [nlohmann_json](https://github.com/nlohmann/json)
-3. [pugixml](https://github.com/zeux/pugixml)
-
-## Cloning
-
-This project uses git submodules. Cloning therefore requires an additional flag:
+To retrieve the code from GitHub:
 
 ```cmd
-git clone git@github.com:TimZoet/BetterTest.git source --recurse-submodules
+git clone https://github.com/TimZoet/BetterTest.git source --recurse-submodules
 ```
 
 ## Exporting to Conan
@@ -28,17 +13,23 @@ git clone git@github.com:TimZoet/BetterTest.git source --recurse-submodules
 To export the `bettertest` package to your local Conan cache:
 
 ```cmd
-cd source
-conan export . user/channel
+conan export --user timzoet --channel v1.0.0 source
 ```
 
-## Building and Installing Locally
+Make sure to update the channel when the version is different.
 
-Generating project files can be done using e.g.:
+## Including the Package
 
-```cmd
-mkdir build && cd build
-cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_INSTALL_PREFIX=..\install ..\source
+To include the package from your `conanfile.py`:
+
+```py
+def requirements(self):
+    self.requires("bettertest/1.0.0@timzoet/v1.0.0")
 ```
 
-Then build and install using your preferred method.
+To find the package and link it in one of your `CMakeLists.txt`:
+
+```cmake
+find_package(bettertest REQUIRED)
+target_link_libraries(<target> bettertest::bettertest)
+```

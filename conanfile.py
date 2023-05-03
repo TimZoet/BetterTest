@@ -12,11 +12,27 @@ class BetterTestConan(ConanFile):
     
     url = "https://github.com/TimZoet/BetterTest"
 
+    @property
+    def user(self):
+        return getattr(self, "_user", "timzoet")
+    
+    @user.setter
+    def user(self, value):
+        self._user = value
+    
+    @property
+    def channel(self):
+        return getattr(self, "_channel", f"v{self.version}")
+    
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
+
     ############################################################################
     ## Settings.                                                              ##
     ############################################################################
 
-    python_requires = "pyreq/1.0.0@timzoet/v1.0.0"
+    python_requires = "pyreq/1.0.1@timzoet/v1.0.1"
     
     python_requires_extend = "pyreq.BaseConan"
     
@@ -69,9 +85,9 @@ class BetterTestConan(ConanFile):
         base = self.python_requires["pyreq"].module.BaseConan
         base.requirements(self)
         
-        self.requires("common/1.0.0@timzoet/v1.0.0")
+        self.requires("common/1.1.0@timzoet/v1.1.0")
         self.requires("date/3.0.1")
-        self.requires("parsertongue/1.3.0@timzoet/v1.3.0")
+        self.requires("parsertongue/1.3.1@timzoet/v1.3.1")
         
         if self.options.build_alexandria:
             self.requires("alexandria/1.0.0@timzoet/stable")

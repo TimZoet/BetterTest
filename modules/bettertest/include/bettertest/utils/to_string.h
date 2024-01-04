@@ -40,6 +40,6 @@ namespace bt
         else if constexpr (std::is_enum_v<T>)
             return std::to_string(static_cast<std::underlying_type_t<T>>(value));
         else
-            return std::string("<val>");
+            return std::string("<not-printable>");
     }
 }  // namespace bt

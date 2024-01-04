@@ -49,9 +49,11 @@ set(HEADERS
     ${INCLUDE_DIR}/utils/date.h
     ${INCLUDE_DIR}/utils/hashing.h
     ${INCLUDE_DIR}/utils/name_filter.h
+    ${INCLUDE_DIR}/utils/projections.h
     ${INCLUDE_DIR}/utils/result.h
     ${INCLUDE_DIR}/utils/to_string.h
     ${INCLUDE_DIR}/utils/try.h
+    ${INCLUDE_DIR}/utils/type_traits.h
     ${INCLUDE_DIR}/utils/version.h
 
     ${INCLUDE_DIR}/run.h
